@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
 type Fact struct {
-	num       int
-	factorial int
+	num       int64
+	factorial int64
 	worker    int
 }
 
@@ -22,21 +23,28 @@ func main() {
 		go work(inputChannel, outputChannel, i)
 	}
 
-	for i := 1; i <= 10; i++ {
-		fact := Fact{
-			num: i,
+	wg := sync.WaitGroup{}
+	wg.Add(1)
+	go func() {
+		for i := 1; i <= 20; i++ {
+			fact := Fact{
+				num: int64(i),
+			}
+			inputChannel <- fact
+			time.Sleep(2 * time.Millisecond)
 		}
-		inputChannel <- fact
-		time.Sleep(2 * time.Millisecond)
-	}
-	close(inputChannel)
+		close(inputChannel)
+	}()
 
-	for i := 1; i <= 10; i++ {
-		factResult := <-outputChannel
-		fmt.Printf("Worker %v : Factorial of %v is %v\n", factResult.worker, factResult.num, factResult.factorial)
-	}
-	close(outputChannel)
-
+	go func() {
+		for i := 1; i <= 20; i++ {
+			factResult := <-outputChannel
+			fmt.Printf("Worker %v : Factorial of %v is %v\n", factResult.worker, factResult.num, factResult.factorial)
+		}
+		close(outputChannel)
+		wg.Done()
+	}()
+	wg.Wait()
 }
 
 func work(inputChannel <-chan Fact, outputChannel chan<- Fact, worker int) {
@@ -48,7 +56,7 @@ func work(inputChannel <-chan Fact, outputChannel chan<- Fact, worker int) {
 	}
 }
 
-func factorial(num int) int {
+func factorial(num int64) int64 {
 	if num < 2 {
 		return num
 	}
