@@ -52,7 +52,6 @@ func work(inputChannel <-chan Fact, outputChannel chan<- Fact, worker int) {
 		input.factorial = factorial(input.num)
 		input.worker = worker
 		outputChannel <- input
-
 	}
 }
 
