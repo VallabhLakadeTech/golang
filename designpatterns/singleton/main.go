@@ -6,6 +6,8 @@ import (
 	"time"
 )
 
+// Singleton pattern:  Creational pattern
+
 type DBInstance struct {
 	dbInstanceCount int
 }
