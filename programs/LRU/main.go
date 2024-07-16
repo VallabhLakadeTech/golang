@@ -25,6 +25,12 @@ func (lruCache *LRUCache) put(data int) {
 	if lruCache.Size <= len(cacheNodes) {
 		var lru int
 		lruTime := time.Now()
+		// Check if it already exists. If yes, just update its time
+		if _, ok := cacheNodes[data]; ok {
+			cacheNodes[data] = lruTime
+			return
+		}
+		// If not then add and find least recently used element to delete
 		for key, value := range cacheNodes {
 			if lruTime.After(value) {
 				lru = key
