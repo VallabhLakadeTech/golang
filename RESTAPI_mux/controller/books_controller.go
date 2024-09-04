@@ -5,18 +5,12 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/VallabhLakadeTech/golang/RESTAPI_mux/model"
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 )
 
-type Books struct {
-	ID              string `json:"id"`
-	BookName        string `json:"bookname"`
-	Author          string `json:"author"`
-	PublicationYear int    `json:"publicationyear"`
-}
-
-var mapOfBooks map[string]Books
+var mapOfBooks map[string]model.Books
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
@@ -24,7 +18,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func AddBooks(w http.ResponseWriter, r *http.Request) {
-	book := Books{}
+	book := model.Books{}
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&book)
 	if err != nil {
@@ -38,7 +32,7 @@ func AddBooks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if len(mapOfBooks) == 0 {
-		mapOfBooks = map[string]Books{}
+		mapOfBooks = map[string]model.Books{}
 	}
 	book.ID = uuid.New().String()
 	mapOfBooks[book.ID] = book
@@ -58,7 +52,7 @@ func GetBook(w http.ResponseWriter, r *http.Request) {
 
 func GetAllBooks(w http.ResponseWriter, r *http.Request) {
 	if len(mapOfBooks) > 0 {
-		var listOfBooks []Books
+		var listOfBooks []model.Books
 		for _, book := range mapOfBooks {
 			listOfBooks = append(listOfBooks, book)
 		}
@@ -70,7 +64,7 @@ func GetAllBooks(w http.ResponseWriter, r *http.Request) {
 
 func UpdateBook(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
-	var book Books
+	var book model.Books
 	err := decoder.Decode(&book)
 	if err != nil {
 		writeResponse(w, "error decoding the provided input", http.StatusInternalServerError)
@@ -99,7 +93,7 @@ func RemoveBook(w http.ResponseWriter, r *http.Request) {
 func GetByAuthor(w http.ResponseWriter, r *http.Request) {
 	author := r.URL.Query().Get("author")
 	fmt.Println("author: ", author)
-	var authorsBook []Books
+	var authorsBook []model.Books
 	for _, book := range mapOfBooks {
 		if book.Author == author {
 			authorsBook = append(authorsBook, book)

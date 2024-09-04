@@ -11,6 +11,7 @@ func work(tasks <-chan int, output chan<- int, workerID int) {
 
 }
 
+// The fan-out pattern is used to distribute tasks to multiple goroutines. This is useful when you want to process tasks concurrently to improve performance.
 // Starting multiple goroutines to handle multiple tasks
 // Advantage: better CPU utilization
 func fanout() {

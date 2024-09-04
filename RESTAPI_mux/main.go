@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/VallabhLakadeTech/golang/RESTAPI_mux/controller"
 	"github.com/gorilla/mux"
@@ -83,7 +84,9 @@ func main() {
 
 func middleware(httpHandler http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		startTime := time.Now()
 		fmt.Printf("Method: %v, URI: %v\n", r.Method, r.URL)
 		httpHandler.ServeHTTP(w, r)
+		fmt.Printf("Time taken by method %v with URI %v is %v\n", r.Method, r.URL, time.Since(startTime))
 	})
 }

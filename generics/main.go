@@ -23,7 +23,7 @@ func add2[T constraints.Ordered](a, b T) T {
 }
 
 // Generics on struct
-// Floowing is called type set feature
+// Following is called type set feature
 type CustomSalary interface {
 	int | float64
 }

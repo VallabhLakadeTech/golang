@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/VallabhLakadeTech/golang/RESTAPI_mux/controller"
+	"github.com/VallabhLakadeTech/golang/RESTAPI_mux/model"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -28,7 +28,7 @@ func TestGetAllBooks(t *testing.T) {
 
 	assert.Equals(t, w.Code, 200)
 
-	var listOfBooks []controller.Books
+	var listOfBooks []model.Books
 	err := json.NewDecoder(w.Body).Decode(&listOfBooks)
 	assert.Nil(t, err)
 

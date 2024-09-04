@@ -7,29 +7,31 @@ import (
 )
 
 func main() {
-	// usingOneChan()
-	usingTwoChan()
+	usingOneChan(15)
+	//usingTwoChan()
 }
 
-func usingOneChan() {
+func usingOneChan(num int) {
 	ch := make(chan int)
 	var wg sync.WaitGroup
 	wg.Add(2)
 	printOdd := func(ch chan int, wg *sync.WaitGroup) {
 		defer wg.Done()
-		for i := 1; i <= 10; i += 2 {
+		for i := 1; i <= num; i += 2 {
 			<-ch
 			fmt.Println("Odd:", i)
-			ch <- 1
+			if i != num {
+				ch <- 1
+			}
 		}
 	}
 
 	printEven := func(ch chan int, wg *sync.WaitGroup) {
 		defer wg.Done()
-		for i := 2; i <= 10; i += 2 {
+		for i := 2; i <= num; i += 2 {
 			<-ch
 			fmt.Println("Even: ", i)
-			if i != 10 {
+			if i != num {
 				ch <- 1
 			}
 		}
