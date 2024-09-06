@@ -19,9 +19,18 @@ func main() {
 	// programs.GenericQueue()
 
 	// Implement Linked List using Interface / Generics
-	programs.GenericLinkedList()
+	// programs.GenericLinkedList()
 
 	// Program to generate prime numbers and print in a separate goroutine
 	//programs.PrimeNumbers()
 
+	//Longest substring
+	// programs.LongestSubstring()
+
+	// programs.ReverseString()
+
+	// Sort a struct by its fields
+	// programs.SortByFields()
+
+	programs.WordCount()
 }
