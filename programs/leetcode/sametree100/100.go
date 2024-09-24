@@ -1,4 +1,4 @@
-package main
+package sametree100
 
 // Definition for a binary tree node.
 type TreeNode struct {
@@ -7,12 +7,12 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func isSameTree(p *TreeNode, q *TreeNode) bool {
+func IsSameTree(p *TreeNode, q *TreeNode) bool {
 
 	if (p != nil && q != nil) && (p.Val == q.Val) {
 
-		leftSame := isSameTree(p.Left, q.Left)
-		rightSame := isSameTree(p.Right, q.Right)
+		leftSame := IsSameTree(p.Left, q.Left)
+		rightSame := IsSameTree(p.Right, q.Right)
 		if leftSame && rightSame {
 			return true
 		}

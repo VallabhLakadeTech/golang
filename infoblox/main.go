@@ -32,5 +32,7 @@ func main() {
 	// Sort a struct by its fields
 	// programs.SortByFields()
 
-	programs.WordCount()
+	// programs.WordCount()
+
+	programs.LastOccurence()
 }

@@ -28,6 +28,12 @@ func TestPostData(t *testing.T) {
 
 	mockServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
+		// switch r.URL.Path {
+		// case "/api/v1/resource":
+		// 	w.WriteHeader(http.StatusOK)
+		// 	w.Write([]byte("Mocked response from /api/v1/resource"))
+		// }
+
 		if r.Method != http.MethodPost {
 			t.Errorf("Expected method POST, got %v", r.Method)
 		}

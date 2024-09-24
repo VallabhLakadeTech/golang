@@ -9,5 +9,5 @@ func main() {
 	basic.PrintHello()
 	basic.PrintUser()
 	basic.ProtoToUserJson()
-
+	basic.JSONToProtoUser()
 }

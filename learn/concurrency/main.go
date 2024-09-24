@@ -21,11 +21,11 @@ func main() {
 	// topics.Channels()
 
 	// Select statement
-	// topics.Select()
+	topics.Select()
 
 	// topics.AvoidingRace()
 
-	topics.Workerpool()
+	// topics.Workerpool()
 
 }
 

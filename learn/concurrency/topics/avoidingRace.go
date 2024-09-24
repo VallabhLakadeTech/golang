@@ -26,7 +26,7 @@ func AvoidingRace() {
 	// fmt.Println("Counter: ", counter)
 
 	//Mutex
-	solveByMutex()
+	//solveByMutex()
 
 	// atomicVariables
 	// solveByAtomicVariables()
@@ -76,7 +76,7 @@ func solveByAtomicVariables() {
 }
 
 func solveByChannel() {
-
+	fmt.Println("In solveByChannel")
 	var counter int
 	ch := make(chan int)
 	var wg sync.WaitGroup

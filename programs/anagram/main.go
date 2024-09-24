@@ -1,9 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	fmt.Println("Is anagram: ", anagram("eat", "ate1"))
+
 }
 
 // eat,ate

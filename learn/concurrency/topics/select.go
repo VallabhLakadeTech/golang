@@ -2,19 +2,15 @@ package topics
 
 import (
 	"fmt"
-	"sync"
 	"time"
 )
 
 func Select() {
-	var wgSelect sync.WaitGroup
-	wgSelect.Add(1)
-	SelectStatement(&wgSelect)
-	wgSelect.Wait()
+	SelectStatement()
 }
 
-func SelectStatement(wg *sync.WaitGroup) {
-	defer wg.Done()
+func SelectStatement() {
+
 	ch1 := make(chan string)
 	ch2 := make(chan string)
 
@@ -34,7 +30,7 @@ func SelectStatement(wg *sync.WaitGroup) {
 		close(ch2)
 	}()
 
-	// myTicker := time.NewTicker(time.Second * 1)
+	myTicker := time.NewTicker(time.Second * 1)
 
 	// for {
 	for ch1 != nil || ch2 != nil {
@@ -51,8 +47,8 @@ func SelectStatement(wg *sync.WaitGroup) {
 			} else {
 				ch2 = nil
 			}
-			// case <-myTicker.C:
-			// 	fmt.Println("I will run after every 1 second")
+		case <-myTicker.C:
+			fmt.Println("I will run after every 1 second")
 		}
 	}
 

@@ -1,4 +1,4 @@
-package main
+package twosum
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 /*
 Problem statement: Find all possible pair whose addition results in the given sum
 */
-func main() {
+func TwoSum() {
 
 	inputArr := []int{2, 7, 1, 8, 3, 6, 5}
 	// 1,2,3,5,6,7,8

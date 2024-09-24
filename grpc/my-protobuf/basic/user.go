@@ -38,5 +38,15 @@ func ProtoToUserJson() {
 }
 
 func JSONToProtoUser() {
+
 	json := `{"id":1,"username":"Vallabh","is_active":true,"password":"c29tZXBhc3N3b3Jk","emails":["vallabh.lakade@gmail.com","vallabh.lakade.1990@gmail.com"],"gender":"GENDER_MALE"}`
+
+	var user1 basic.User
+	err := protojson.Unmarshal([]byte(json), &user1)
+	if err != nil {
+		fmt.Println("Error while unmarshalling data using protojson")
+		return
+	}
+	fmt.Println("JSONToProtoUser: ", user1)
+
 }

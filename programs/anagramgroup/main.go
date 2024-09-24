@@ -6,15 +6,19 @@ import (
 )
 
 func main() {
+	AnagramGroup()
+}
+
+func AnagramGroup() {
 	stringList := []string{"eat", "tea", "tan", "ate", "nat", "bat"}
-	anagramList := groupanagram(stringList)
+	anagramList := Groupanagram(stringList)
 	// Print grouped anagrams
 	for _, group := range anagramList {
 		fmt.Println(strings.Join(group, ", "))
 	}
 }
 
-func frequency(str string) [26]int {
+func Frequency(str string) [26]int {
 
 	var freq [26]int
 	for _, ch := range str {
@@ -23,12 +27,12 @@ func frequency(str string) [26]int {
 	return freq
 }
 
-func groupanagram(stringList []string) map[[26]int][]string {
+func Groupanagram(stringList []string) map[[26]int][]string {
 	// make(map[string]int)
 	anagrams := make(map[[26]int][]string)
 
 	for _, str := range stringList {
-		key := frequency(str)
+		key := Frequency(str)
 		anagrams[key] = append(anagrams[key], str)
 	}
 	return anagrams
